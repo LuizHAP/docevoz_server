@@ -228,4 +228,4 @@ app.get('/', (req, res) => {
     return res.send('API Test');
 })
 
-app.listen(3333)
+app.listen(process.env.port || 3333)
