@@ -226,7 +226,7 @@ app.get('/podcasts', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.send('API Teste');
+    res.send('API Test');
 })
 
 app.listen(3333)
