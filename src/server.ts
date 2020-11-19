@@ -221,12 +221,11 @@ const data = [{
 app.use(cors());
 app.use(express.json());
 app.get('/podcasts', (req, res) => {
-
     return res.json(data);
 })
 
 app.get('/', (req, res) => {
-    res.send('API Test');
+    return res.send('API Test');
 })
 
 app.listen(3333)
