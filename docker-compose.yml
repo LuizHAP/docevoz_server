@@ -1,0 +1,32 @@
+version: "3.8"
+   
+services:
+  db:
+    image: postgres
+    container_name: db_docevoz
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=${PG_DATABASE}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+  api:
+    image: node:latest
+    container_name: api
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 3333:3333
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "npm i -g knex && yarn install && yarn build && yarn run knex:migrate && yarn start"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
